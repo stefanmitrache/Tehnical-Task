@@ -1,0 +1,27 @@
+import time
+import random
+import json
+import paho.mqtt.publish as publish
+
+MQTT_HOST= 'mqtt.beia-telemetrie.ro'
+MQTT_TOPIC= 'training/device/Mitrache-Stefan'
+
+
+while True:
+
+   num = 10
+   ri=random.randrange (0, num, 1)
+   print('Random integer 0 to', num,':',ri)
+
+
+
+   payload_dict = {"Numar_aleatoriu": ri}
+
+
+
+   try:
+      publish.single(MQTT_TOPIC, qos=1, hostname=MQTT_HOST, payload=json.dumps(payload_dict))
+   except:
+     pass
+
+   time.sleep(10)
